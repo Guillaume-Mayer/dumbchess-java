@@ -18,8 +18,8 @@ public class CorePositionTest {
 	
 	private CorePosition pos;
 	
-	private static final String fileNameSer = "tmp/corePosition.ser";
-	private static final String fileNameDumb = "tmp/initialpos.dumbchess";
+	private static final String fileNameSer = "files/corePosition.ser";
+	private static final String fileNameDumb = "files/initialpos.dumbchess";
 	
 	@Before
 	public void setUp() throws Exception {
