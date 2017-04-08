@@ -61,6 +61,9 @@ public class CorePositionTest {
 		try (FileOutputStream fos = new FileOutputStream(fileNameDumb)) {
 			pos.write(fos);
 		}
+		File file = new File(fileNameDumb);
+		assertTrue(file.exists());
+		assertEquals(33, file.length());
 	}
 	
 	@Test
