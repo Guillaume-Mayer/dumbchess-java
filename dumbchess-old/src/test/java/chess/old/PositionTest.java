@@ -1,4 +1,4 @@
-package com.pikouik.chess.core;
+package chess.old;
 
 import static org.junit.Assert.*;
 

@@ -1,10 +1,4 @@
-package com.pikouik.chess.core;
-
-import com.pikouik.chess.core.CastlingRights;
-import com.pikouik.chess.core.Move;
-import com.pikouik.chess.core.Piece;
-import com.pikouik.chess.core.PieceType;
-import com.pikouik.chess.core.Side;
+package chess.old;
 
 public class MoveClassic implements Move {
 	

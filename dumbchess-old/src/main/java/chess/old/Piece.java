@@ -1,7 +1,4 @@
-package com.pikouik.chess.core;
-
-import com.pikouik.chess.core.Color;
-import com.pikouik.chess.core.InvalidFenException;
+package chess.old;
 
 public final class Piece {
 

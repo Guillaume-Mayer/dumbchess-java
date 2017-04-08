@@ -1,4 +1,4 @@
-package com.pikouik.chess.core;
+package chess.old;
 
 public interface Move {
 	

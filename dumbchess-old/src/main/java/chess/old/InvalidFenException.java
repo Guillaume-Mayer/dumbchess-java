@@ -1,4 +1,4 @@
-package com.pikouik.chess.core;
+package chess.old;
 
 public class InvalidFenException extends Exception {
 

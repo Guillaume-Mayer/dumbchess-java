@@ -1,4 +1,4 @@
-package com.pikouik.chess.engine;
+package chess.old;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.pikouik.chess.core.Color;
-import com.pikouik.chess.core.Move;
-import com.pikouik.chess.core.Position;
 
 public class EngineClassic {
 	

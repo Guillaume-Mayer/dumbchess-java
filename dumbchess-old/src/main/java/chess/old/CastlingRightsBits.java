@@ -1,8 +1,4 @@
-package com.pikouik.chess.core;
-
-import com.pikouik.chess.core.Color;
-import com.pikouik.chess.core.InvalidFenException;
-import com.pikouik.chess.core.Side;
+package chess.old;
 
 public class CastlingRightsBits implements CastlingRights {
 	

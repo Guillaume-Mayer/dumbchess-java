@@ -1,13 +1,8 @@
-package com.pikouik.chess.engine;
+package chess.old;
 
 import static org.junit.Assert.*;
 
 import org.junit.*;
-
-import com.pikouik.chess.core.InvalidFenException;
-import com.pikouik.chess.core.Move;
-import com.pikouik.chess.core.Position;
-import com.pikouik.chess.core.PositionClassic;
 
 public class EngineTest {
 	

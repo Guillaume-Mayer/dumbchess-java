@@ -1,18 +1,7 @@
-package com.pikouik.chess.core;
+package chess.old;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.pikouik.chess.core.CastlingRights;
-import com.pikouik.chess.core.CastlingRightsBits;
-import com.pikouik.chess.core.Move;
-import com.pikouik.chess.core.Position;
-import com.pikouik.chess.core.Piece;
-import com.pikouik.chess.core.PieceType;
-import com.pikouik.chess.core.Color;
-import com.pikouik.chess.core.Const;
-import com.pikouik.chess.core.InvalidFenException;
-import com.pikouik.chess.core.Side;
 
 public final class PositionClassic implements Position {
 

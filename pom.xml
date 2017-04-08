@@ -9,8 +9,9 @@
 
     <modules>
         <module>dumbchess-core</module>
-        <module>dumbchess-bench</module>
         <module>dumbchess-old</module>
+        <module>dumbchess-test</module>
+        <module>dumbchess-bench</module>
     </modules>
 
 </project>
