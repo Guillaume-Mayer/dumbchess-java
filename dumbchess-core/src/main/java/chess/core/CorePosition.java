@@ -189,5 +189,9 @@ public class CorePosition implements Position {
 		if (!castlingFlags.queenSide(Color.WHITE)) return false;
 		return board.isCastleQueen(move);
 	}
+
+	public String getPiece(Move move) {
+		return board.getPiece(move);
+	}
 	
 }

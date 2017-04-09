@@ -58,6 +58,7 @@ public class ColorPosition implements Position {
 			return "O-O-O";
 		}
 		StringBuilder sb = new StringBuilder();
+		sb.append(corePosition.getPiece(move));
 		sb.append(corePosition.getMoveColumn1(move, colorToPlay));
 		sb.append(corePosition.getMoveRow1(move, colorToPlay));
 		sb.append(corePosition.isCapture(move) ? 'x' : '-');

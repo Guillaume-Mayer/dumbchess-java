@@ -603,4 +603,24 @@ public class TiledBoard implements Board {
 			throw new IllegalArgumentException("Illegal color argument");
 		}
 	}
+
+	@Override
+	public String getPiece(Move move) {
+		switch (tiles[((TiledMove) move).getIndex1()].getPiece()) {
+		case KING:
+			return "K";
+		case QUEEN:
+			return "Q";
+		case ROOK:
+			return "R";
+		case BISHOP:
+			return "B";
+		case KNIGHT:
+			return "N";
+		case PAWN:
+			return "";
+		default:
+			throw new IllegalStateException("Illegal piece");
+		}
+	}
 }

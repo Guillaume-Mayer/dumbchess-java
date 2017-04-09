@@ -12,6 +12,7 @@ interface Board {
 	char getMoveColumn2(Move move, Color colorToPlay);
 	char getMoveRow1(Move move, Color colorToPlay);
 	char getMoveRow2(Move move, Color colorToPlay);
+	String getPiece(Move move);
 	boolean isCapture(Move move);
 	boolean isEnPassant(Move move);
 	boolean isCastleKing(Move move);
