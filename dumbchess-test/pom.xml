@@ -14,6 +14,18 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
+        </dependency>
+        <dependency>
+        	<groupId>com.pikouik</groupId>
+        	<artifactId>dumbchess-core</artifactId>
+        	<version>0.0.1</version>
+        	<scope>test</scope>
+		</dependency>
+        <dependency>
+        	<groupId>com.pikouik</groupId>
+        	<artifactId>dumbchess-old</artifactId>
+        	<version>0.0.1</version>
+        	<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
