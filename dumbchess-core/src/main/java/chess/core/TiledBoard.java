@@ -195,16 +195,32 @@ public class TiledBoard implements Board {
 		i2 = i - VUNIT - HUNIT;
 		if (isEmptyOrBlack(i2)) moves.add(new TiledMove(i, i2));
 		if (castleKingSide) {
-			if (isEmpty(i + HUNIT) && isEmpty(i + 2*HUNIT)) {
-				if (!isAttacked(i) && !isAttacked(i + HUNIT)) {
-					moves.add(new TiledMove(i, i + 2*HUNIT));
+			if (i % 10 == 5) {
+				if (isEmpty(i + HUNIT) && isEmpty(i + 2*HUNIT)) {
+					if (!isAttacked(i) && !isAttacked(i + HUNIT)) {
+						moves.add(new TiledMove(i, i + 2*HUNIT));
+					}
+				}
+			} else {
+				if (isEmpty(i - HUNIT) && isEmpty(i - 2*HUNIT)) {
+					if (!isAttacked(i) && !isAttacked(i - HUNIT)) {
+						moves.add(new TiledMove(i, i - 2*HUNIT));
+					}
 				}
 			}
 		}
 		if (castleQueenSide) {
-			if (isEmpty(i - HUNIT) && isEmpty(i - 2*HUNIT) && isEmpty(i - 3*HUNIT)) {
-				if (!isAttacked(i) && !isAttacked(i - HUNIT)) {
-					moves.add(new TiledMove(i, i - 2*HUNIT));
+			if (i % 10 == 4) {
+				if (isEmpty(i - HUNIT) && isEmpty(i - 2*HUNIT) && isEmpty(i - 3*HUNIT)) {
+					if (!isAttacked(i) && !isAttacked(i - HUNIT)) {
+						moves.add(new TiledMove(i, i - 2*HUNIT));
+					}
+				}
+			} else {
+				if (isEmpty(i + HUNIT) && isEmpty(i + 2*HUNIT) && isEmpty(i + 3*HUNIT)) {
+					if (!isAttacked(i) && !isAttacked(i + HUNIT)) {
+						moves.add(new TiledMove(i, i + 2*HUNIT));
+					}
 				}
 			}
 		}

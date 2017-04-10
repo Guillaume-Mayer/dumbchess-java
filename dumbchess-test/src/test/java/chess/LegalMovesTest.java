@@ -20,7 +20,7 @@ public class LegalMovesTest {
 		
 	@Test
 	public void testRandomPlay() {
-		for (int i = 1; i < 100; i++) {
+		for (int i = 1; i <= 3; i++) {
 			randomPlay(i);
 		}
 	}
