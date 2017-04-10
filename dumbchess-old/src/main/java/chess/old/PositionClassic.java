@@ -167,7 +167,7 @@ public final class PositionClassic implements Position {
 	}
 	
 	public List<Move> getLegalMoves(Color color) {
-		return getLegalMoves(color, false);
+		return getLegalMoves(color, true);
 	}
 		
 	private List<Move> getLegalMoves(Color color, boolean allowStupidPromotion) {
@@ -216,6 +216,9 @@ public final class PositionClassic implements Position {
 	@Override
 	public String moveToAlg(Move move) {
 		String sMove = board.moveToAlg((MoveClassic) move);
+		play(move);
+		if (isCheck()) sMove += "+";
+		unplay(move);
 		return sMove;
 	}
 

@@ -52,9 +52,9 @@ public class ColorPosition implements Position {
 	}
 	
 	public String moveToAlgeb(Move move) {
-		if (corePosition.isCastleKing(move)) {
+		if (corePosition.isCastleKing(move, colorToPlay)) {
 			return "O-O";
-		} else if (corePosition.isCastleQueen(move)) {
+		} else if (corePosition.isCastleQueen(move, colorToPlay)) {
 			return "O-O-O";
 		}
 		StringBuilder sb = new StringBuilder();
@@ -70,13 +70,13 @@ public class ColorPosition implements Position {
 				sb.append('Q');
 				break;
 			case KNIGHT:
-				sb.append('Q');
+				sb.append('N');
 				break;
 			case ROOK:
-				sb.append('Q');
+				sb.append('R');
 				break;
 			case BISHOP:
-				sb.append('Q');
+				sb.append('B');
 				break;
 			default:
 				throw new IllegalStateException("Illegal promotion");

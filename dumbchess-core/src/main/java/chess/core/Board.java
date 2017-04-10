@@ -15,8 +15,8 @@ interface Board {
 	String getPiece(Move move);
 	boolean isCapture(Move move);
 	boolean isEnPassant(Move move);
-	boolean isCastleKing(Move move);
-	boolean isCastleQueen(Move move);
+	boolean isCastleKing(Move move, Color colorToPLay);
+	boolean isCastleQueen(Move move, Color colorToPlay);
 	int getTwoPushColumn(Move move);
 	boolean preventCastleKing(Color color, Move move);
 	boolean preventCastleQueen(Color color, Move move);

@@ -252,7 +252,7 @@ public class PositionTest {
 		expected.add("Bf1-e2");
 		expected.add("Bf1-d3");
 		expected.add("Bf1-c4");
-		expected.add("Bf1-b5");
+		expected.add("Bf1-b5+");
 		expected.add("Bf1-a6");
 		expected.add("Qd1-e2");
 		expected.add("Ke1-e2");
@@ -300,7 +300,7 @@ public class PositionTest {
 		expected.add("Ng8-h6");
 		expected.add("Qd8-c7");
 		expected.add("Qd8-b6");
-		expected.add("Qd8-a5");
+		expected.add("Qd8-a5+");
 		expected.add("Qd8-d7");
 		expected.add("Ke8-d7");
 		expected.add("Bc8-d7");

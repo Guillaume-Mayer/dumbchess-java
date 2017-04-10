@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import chess.core.ColorPosition;
@@ -18,31 +17,37 @@ public class LegalMovesTest {
 	
 	ColorPosition pos1;
 	PositionClassic pos2;
-	Random random;
-	
-	@Before
-	public void setUp() throws Exception {
-		pos1 = ColorPosition.initial();
-		pos2 = new PositionClassic();
-		random = new Random();
-	}
-
+		
 	@Test
-	public void testLegalMoves() {
-		int halfMoveCount = 0;
-		while (halfMoveCount < 400 && assertAndPlay() > 0) {
-			halfMoveCount ++;
+	public void testRandomPlay() {
+		for (int i = 1; i < 100; i++) {
+			randomPlay(i);
 		}
 	}
 		
-	private int assertAndPlay() {
+	private int randomPlay(long seed) {
+		pos1 = ColorPosition.initial();
+		pos2 = new PositionClassic();
+		System.out.println("Random Seed = " + seed);
+		Random random = new Random(seed);
+		int halfMoveCount = 0;
+		while (halfMoveCount < 500 && assertAndPlay(random) > 0) {
+			halfMoveCount ++;
+		}
+		System.out.println("HalfMoveCount: " + halfMoveCount);
+		return halfMoveCount;
+	}
+		
+	private int assertAndPlay(Random random) {
 		
 		// Compare the legal moves count
 		Collection<chess.core.Move> moves1 = pos1.getLegalMoves();
 		List<chess.old.Move> moves2 = pos2.getLegalMoves();
 		int count = moves1.size();
-		assertEquals(count, moves2.size());
-		if (count == 0) return 0;
+		if (count == 0) {
+			assertEquals(0, moves2.size());
+			return 0;
+		}
 		
 		// Compare the legal moves content
 		assertEquals(

@@ -99,10 +99,10 @@ public class TiledBoard implements Board {
 		TiledBoard newBoard = new TiledBoard(this, tMove);
 		if (move.isPromotion()) {
 			newBoard.tiles[tMove.getIndex2()] = new ByteTile(move.getPromotion(), Color.WHITE);
-		} else if (isCastleKing(move)) {
+		} else if (isCastleKing(move, Color.WHITE)) {
 			newBoard.tiles[26] = newBoard.tiles[28];
 			newBoard.tiles[28] = new ByteTile(ByteTile.EMPTY);
-		} else if (isCastleQueen(move)) {
+		} else if (isCastleQueen(move, Color.WHITE)) {
 			newBoard.tiles[24] = newBoard.tiles[28];
 			newBoard.tiles[21] = new ByteTile(ByteTile.EMPTY);
 		}
@@ -512,12 +512,20 @@ public class TiledBoard implements Board {
 
 	@Override
 	public char getMoveColumn1(Move move, Color colorToPlay) {
-		return "abcdefgh".charAt((((TiledMove) move).getIndex1() % VUNIT) - 1);
+		if (colorToPlay == Color.WHITE) {
+			return "abcdefgh".charAt((((TiledMove) move).getIndex1() % VUNIT) - 1);
+		} else {
+			return "hgfedcba".charAt((((TiledMove) move).getIndex1() % VUNIT) - 1);
+		}
 	}
 	
 	@Override
 	public char getMoveColumn2(Move move, Color colorToPlay) {
-		return "abcdefgh".charAt((((TiledMove) move).getIndex2() % VUNIT) - 1);
+		if (colorToPlay == Color.WHITE) {
+			return "abcdefgh".charAt((((TiledMove) move).getIndex2() % VUNIT) - 1);
+		} else {
+			return "hgfedcba".charAt((((TiledMove) move).getIndex2() % VUNIT) - 1);
+		}
 	}
 	
 	@Override
@@ -549,22 +557,30 @@ public class TiledBoard implements Board {
 		int index1 = tMove.getIndex1();
 		if (!tiles[index1].hasPiece(Piece.PAWN)) return false;
 		int index2 = tMove.getIndex2();
-		if (!tiles[index2].hasPiece()) return false;
+		if (tiles[index2].hasPiece()) return false;
 		return (index2 == index1 + HUNIT + VUNIT || index2 == index1 - HUNIT + VUNIT);
 	}
 
 	@Override
-	public boolean isCastleKing(Move move) {
+	public boolean isCastleKing(Move move, Color colorToPlay) {
 		TiledMove tMove = (TiledMove) move;
 		int index1 = tMove.getIndex1();
-		return (index1 == king && tMove.getIndex2() == index1 + 2*HUNIT);
+		if (colorToPlay == Color.WHITE) {
+			return (index1 == king && tMove.getIndex2() == index1 + 2*HUNIT);
+		} else {
+			return (index1 == king && tMove.getIndex2() == index1 - 2*HUNIT);
+		}
 	}
 
 	@Override
-	public boolean isCastleQueen(Move move) {
+	public boolean isCastleQueen(Move move, Color colorToPlay) {
 		TiledMove tMove = (TiledMove) move;
 		int index1 = tMove.getIndex1();
-		return (index1 == king && tMove.getIndex2() == index1 - 2*HUNIT);
+		if (colorToPlay == Color.WHITE) {
+			return (index1 == king && tMove.getIndex2() == index1 - 2*HUNIT);
+		} else {
+			return (index1 == king && tMove.getIndex2() == index1 + 2*HUNIT);
+		}
 	}
 
 	@Override
