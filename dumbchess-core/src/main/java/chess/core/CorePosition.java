@@ -180,14 +180,14 @@ public class CorePosition implements Position {
 		return board.isEnPassant(move);
 	}
 
-	public boolean isCastleKing(Move move, Color colorToPlay) {
+	public boolean isCastleKing(Move move) {
 		if (!castlingFlags.kingSide(Color.WHITE)) return false;
-		return board.isCastleKing(move, colorToPlay);
+		return board.isCastleKing(move);
 	}
 
-	public boolean isCastleQueen(Move move, Color colorToPlay) {
+	public boolean isCastleQueen(Move move) {
 		if (!castlingFlags.queenSide(Color.WHITE)) return false;
-		return board.isCastleQueen(move, colorToPlay);
+		return board.isCastleQueen(move);
 	}
 
 	public String getPiece(Move move) {

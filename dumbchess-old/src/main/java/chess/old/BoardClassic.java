@@ -223,7 +223,8 @@ public final class BoardClassic {
 					moves.add(new MoveClassic(row, col, row, col - 2).setCastling(Side.QUEEN));
 				}
 			}
-		} else if (castlingRights.has(color, Side.KING)) {
+		}
+		if (castlingRights.has(color, Side.KING)) {
 			if (isEmpty(row, col + 1) && isEmpty(row, col + 2)) {
 				if (!isAttacked(row, col, color) && !isAttacked(row, col + 1, color) && !isAttacked(row, col + 2, color)) {
 					moves.add(new MoveClassic(row, col, row, col + 2).setCastling(Side.KING));

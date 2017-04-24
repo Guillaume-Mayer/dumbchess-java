@@ -1,6 +1,7 @@
 package chess.core;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class ColorPosition implements Position {
 	
@@ -52,37 +53,39 @@ public class ColorPosition implements Position {
 	}
 	
 	public String moveToAlgeb(Move move) {
-		if (corePosition.isCastleKing(move, colorToPlay)) {
-			return "O-O";
-		} else if (corePosition.isCastleQueen(move, colorToPlay)) {
-			return "O-O-O";
-		}
-		StringBuilder sb = new StringBuilder();
-		sb.append(corePosition.getPiece(move));
-		sb.append(corePosition.getMoveColumn1(move, colorToPlay));
-		sb.append(corePosition.getMoveRow1(move, colorToPlay));
-		sb.append(corePosition.isCapture(move) ? 'x' : '-');
-		sb.append(corePosition.getMoveColumn2(move, colorToPlay));
-		sb.append(corePosition.getMoveRow2(move, colorToPlay));
-		if (move.isPromotion()) {
-			switch (move.getPromotion()) {
-			case QUEEN:
-				sb.append('Q');
-				break;
-			case KNIGHT:
-				sb.append('N');
-				break;
-			case ROOK:
-				sb.append('R');
-				break;
-			case BISHOP:
-				sb.append('B');
-				break;
-			default:
-				throw new IllegalStateException("Illegal promotion");
+		StringBuilder sb;
+		if (corePosition.isCastleKing(move)) {
+			sb = new StringBuilder("O-O");
+		} else if (corePosition.isCastleQueen(move)) {
+			sb = new StringBuilder("O-O-O");
+		} else {
+			sb = new StringBuilder();
+			sb.append(corePosition.getPiece(move));
+			sb.append(corePosition.getMoveColumn1(move, colorToPlay));
+			sb.append(corePosition.getMoveRow1(move, colorToPlay));
+			sb.append(corePosition.isCapture(move) ? 'x' : '-');
+			sb.append(corePosition.getMoveColumn2(move, colorToPlay));
+			sb.append(corePosition.getMoveRow2(move, colorToPlay));
+			if (move.isPromotion()) {
+				switch (move.getPromotion()) {
+				case QUEEN:
+					sb.append('Q');
+					break;
+				case KNIGHT:
+					sb.append('N');
+					break;
+				case ROOK:
+					sb.append('R');
+					break;
+				case BISHOP:
+					sb.append('B');
+					break;
+				default:
+					throw new IllegalStateException("Illegal promotion");
+				}
+			} else if (corePosition.isEnPassant(move)) {
+				sb.append("ep");
 			}
-		} else if (corePosition.isEnPassant(move)) {
-			sb.append("ep");
 		}
 		if (corePosition.play(move).isCheck()) {
 			sb.append('+');
@@ -96,5 +99,11 @@ public class ColorPosition implements Position {
 		sb.append("\nColor to play: ");
 		sb.append(colorToPlay);
 		return sb.toString();
+	}
+
+	public ColorPosition play(String sMove) {
+		Optional<Move> oMove = getLegalMoves().stream().filter(m -> moveToAlgeb(m).equals(sMove)).findAny();
+		if (oMove.isPresent()) return play(oMove.get());
+		throw new IllegalMoveException("Move \"" + sMove + "\" is not legal");
 	}
 }

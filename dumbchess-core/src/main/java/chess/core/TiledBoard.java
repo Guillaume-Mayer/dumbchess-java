@@ -99,12 +99,22 @@ public class TiledBoard implements Board {
 		TiledBoard newBoard = new TiledBoard(this, tMove);
 		if (move.isPromotion()) {
 			newBoard.tiles[tMove.getIndex2()] = new ByteTile(move.getPromotion(), Color.WHITE);
-		} else if (isCastleKing(move, Color.WHITE)) {
-			newBoard.tiles[26] = newBoard.tiles[28];
-			newBoard.tiles[28] = new ByteTile(ByteTile.EMPTY);
-		} else if (isCastleQueen(move, Color.WHITE)) {
-			newBoard.tiles[24] = newBoard.tiles[28];
-			newBoard.tiles[21] = new ByteTile(ByteTile.EMPTY);
+		} else if (isCastleKing(move)) {
+			if (king == 25) {
+				newBoard.tiles[26] = newBoard.tiles[28];
+				newBoard.tiles[28] = new ByteTile(ByteTile.EMPTY);
+			} else {
+				newBoard.tiles[23] = newBoard.tiles[21];
+				newBoard.tiles[21] = new ByteTile(ByteTile.EMPTY);
+			}
+		} else if (isCastleQueen(move)) {
+			if (king == 25) {
+				newBoard.tiles[24] = newBoard.tiles[21];
+				newBoard.tiles[21] = new ByteTile(ByteTile.EMPTY);
+			} else {
+				newBoard.tiles[25] = newBoard.tiles[28];
+				newBoard.tiles[28] = new ByteTile(ByteTile.EMPTY);
+			}
 		}
 		// Reverse the array
 		newBoard.tiles = 
@@ -210,7 +220,7 @@ public class TiledBoard implements Board {
 			}
 		}
 		if (castleQueenSide) {
-			if (i % 10 == 4) {
+			if (i % 10 == 5) {
 				if (isEmpty(i - HUNIT) && isEmpty(i - 2*HUNIT) && isEmpty(i - 3*HUNIT)) {
 					if (!isAttacked(i) && !isAttacked(i - HUNIT)) {
 						moves.add(new TiledMove(i, i - 2*HUNIT));
@@ -578,24 +588,28 @@ public class TiledBoard implements Board {
 	}
 
 	@Override
-	public boolean isCastleKing(Move move, Color colorToPlay) {
+	public boolean isCastleKing(Move move) {
 		TiledMove tMove = (TiledMove) move;
-		int index1 = tMove.getIndex1();
-		if (colorToPlay == Color.WHITE) {
-			return (index1 == king && tMove.getIndex2() == index1 + 2*HUNIT);
+		if (tMove.getIndex1() != king) return false;
+		if (king == 25) {
+			return (tMove.getIndex2() == 27);
+		} else if (king == 24 ){
+			return (tMove.getIndex2() == 22);
 		} else {
-			return (index1 == king && tMove.getIndex2() == index1 - 2*HUNIT);
+			return false;
 		}
 	}
 
 	@Override
-	public boolean isCastleQueen(Move move, Color colorToPlay) {
+	public boolean isCastleQueen(Move move) {
 		TiledMove tMove = (TiledMove) move;
-		int index1 = tMove.getIndex1();
-		if (colorToPlay == Color.WHITE) {
-			return (index1 == king && tMove.getIndex2() == index1 - 2*HUNIT);
+		if (tMove.getIndex1() != king) return false;
+		if (king == 25) {
+			return (tMove.getIndex2() == 23);
+		} else if (king == 24 ){
+			return (tMove.getIndex2() == 26);
 		} else {
-			return (index1 == king && tMove.getIndex2() == index1 + 2*HUNIT);
+			return false;
 		}
 	}
 
@@ -614,9 +628,13 @@ public class TiledBoard implements Board {
 		switch (color) {
 		case WHITE:
 			int index1 = tMove.getIndex1();
-			return (index1 == king || index1 == 28);
+			return (index1 == king || (king == 25 && index1 == 28) || (king == 24 && index1 == 21));
 		case BLACK:
-			return (tMove.getIndex2() == 98);
+			if (tiles[95].hasPiece(Piece.KING)) {
+				return (tMove.getIndex2() == 98);
+			} else {
+				return (tMove.getIndex2() == 91);
+			}
 		default:
 			throw new IllegalArgumentException("Illegal color argument");
 		}
@@ -625,12 +643,16 @@ public class TiledBoard implements Board {
 	@Override
 	public boolean preventCastleQueen(Color color, Move move) {
 		TiledMove tMove = (TiledMove) move;
+		int index1 = tMove.getIndex1();
 		switch (color) {
-		case WHITE:
-			int index1 = tMove.getIndex1();
-			return (index1 == king || index1 == 21);
+		case WHITE:			
+			return (index1 == king || (king == 25 && index1 == 21) || (king == 24 && index1 == 28));
 		case BLACK:
-			return (tMove.getIndex2() == 91);
+			if (tiles[95].hasPiece(Piece.KING)) {
+				return (tMove.getIndex2() == 91);
+			} else {
+				return (tMove.getIndex2() == 98);
+			}
 		default:
 			throw new IllegalArgumentException("Illegal color argument");
 		}

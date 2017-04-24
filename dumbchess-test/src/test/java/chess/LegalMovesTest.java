@@ -15,12 +15,12 @@ import chess.old.PositionClassic;
 
 public class LegalMovesTest {
 	
-	ColorPosition pos1;
-	PositionClassic pos2;
+	private ColorPosition pos1;
+	private PositionClassic pos2;
 		
 	@Test
 	public void testRandomPlay() {
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 10000; i++) {
 			randomPlay(i);
 		}
 	}
@@ -31,7 +31,7 @@ public class LegalMovesTest {
 		System.out.println("Random Seed = " + seed);
 		Random random = new Random(seed);
 		int halfMoveCount = 0;
-		while (halfMoveCount < 500 && assertAndPlay(random) > 0) {
+		while (halfMoveCount < 200 && assertAndPlay(random) > 0) {
 			halfMoveCount ++;
 		}
 		System.out.println("HalfMoveCount: " + halfMoveCount);
@@ -69,7 +69,7 @@ public class LegalMovesTest {
 		String sMove = pos2.moveToAlg(move);
 		
 		// Print it
-		System.out.println(rand + ":" + sMove);
+		System.out.println(".play(\"" + sMove + "\")");
 		
 		// Play it
 		pos1 = pos1.play(mapMoves1.get(sMove));

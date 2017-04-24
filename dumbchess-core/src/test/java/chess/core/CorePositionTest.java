@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -82,9 +81,4 @@ public class CorePositionTest {
 		assertEquals(pos.toBase64(), p.toBase64());
 	}
 	
-	@After
-	public void tearDown() throws Exception {
-		
-	}
-
 }
