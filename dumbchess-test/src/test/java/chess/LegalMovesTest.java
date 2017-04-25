@@ -31,7 +31,7 @@ public class LegalMovesTest {
 		System.out.println("Random Seed = " + seed);
 		Random random = new Random(seed);
 		int halfMoveCount = 0;
-		while (halfMoveCount < 100 && assertAndPlay(random) > 0) {
+		while (halfMoveCount <= 200 && assertAndPlay(random) > 0) {
 			halfMoveCount ++;
 		}
 		System.out.println("HalfMoveCount: " + halfMoveCount);
