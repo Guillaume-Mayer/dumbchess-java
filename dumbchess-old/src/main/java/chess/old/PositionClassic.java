@@ -116,15 +116,19 @@ public final class PositionClassic implements Position {
 			break;
 		case ROOK:
 			// Update castling rights
-			if (col1 == 0) {
-				castlingRights.unset(color, Side.QUEEN);
-			} else if (col1 == 7) {
-				castlingRights.unset(color, Side.KING);
+			if ((color == Color.WHITE && row1 == 0) || (color == Color.BLACK && row1 == 7)) {
+				if (col1 == 0) {
+					castlingRights.unset(color, Side.QUEEN);
+				} else if (col1 == 7) {
+					castlingRights.unset(color, Side.KING);
+				}
 			}
 			break;
 		case KING:
 			// Update castling rights
 			castlingRights.unset(color);
+			break;
+		default:
 			break;
 		}
 		// Reset half move count on capture
