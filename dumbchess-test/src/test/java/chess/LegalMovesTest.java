@@ -17,10 +17,11 @@ public class LegalMovesTest {
 	
 	private ColorPosition pos1;
 	private PositionClassic pos2;
-		
+	private Random random = new Random();
+
 	@Test
 	public void testRandomPlay() {
-		for (int i = 1; i <= 20000; i++) {
+		for (int i = 0; i < 200; i++) {
 			randomPlay(i);
 		}
 	}
@@ -28,13 +29,10 @@ public class LegalMovesTest {
 	private int randomPlay(long seed) {
 		pos1 = ColorPosition.initial();
 		pos2 = new PositionClassic();
-		System.out.println("Random Seed = " + seed);
-		Random random = new Random(seed);
 		int halfMoveCount = 0;
-		while (halfMoveCount <= 200 && assertAndPlay(random) > 0) {
+		while (halfMoveCount < 200 && assertAndPlay(random) > 0) {
 			halfMoveCount ++;
 		}
-		System.out.println("HalfMoveCount: " + halfMoveCount);
 		return halfMoveCount;
 	}
 		
@@ -67,9 +65,6 @@ public class LegalMovesTest {
 		int rand = random.nextInt(count);
 		chess.old.Move move = moves2.get(rand);
 		String sMove = pos2.moveToAlg(move);
-		
-		// Print it
-		System.out.println(".play(\"" + sMove + "\")");
 		
 		// Play it
 		pos1 = pos1.play(mapMoves1.get(sMove));
