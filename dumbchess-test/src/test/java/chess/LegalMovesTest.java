@@ -65,7 +65,7 @@ public class LegalMovesTest {
 		// Compare the legal moves content
 		assertEquals(
 				moves1.stream().map(m -> pos1.moveToAlgeb(m)).sorted().collect(Collectors.toList()),
-				moves3.stream().map(m -> m.substring(12)).collect(Collectors.toList())
+				moves3.stream().map(m -> m.substring(12)).sorted().collect(Collectors.toList())
 				);
 		
 		// Make a map alg -> move1

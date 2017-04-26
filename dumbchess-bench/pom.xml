@@ -28,6 +28,11 @@
         	<artifactId>dumbchess-core</artifactId>
         	<version>0.0.1</version>
         </dependency>
+        <dependency>
+        	<groupId>com.pikouik</groupId>
+        	<artifactId>dumbchess-old</artifactId>
+        	<version>0.0.1</version>
+ 		</dependency>
     </dependencies>
 
     <properties>
