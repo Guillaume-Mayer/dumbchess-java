@@ -9,36 +9,40 @@ import java.util.Collection;
 import java.util.Optional;
 
 public class CorePosition implements Position {
-		
+
 	private Board board;
 	private CastlingFlags castlingFlags;
 	private int enPassant;
-	
+
 	private transient Collection<Move> legalMoves;
 	private transient Optional<Boolean> check = Optional.empty();
-	
+
 	private static CorePosition initialPosition;
-	
+
 	public CorePosition(Board board, CastlingFlags castlingFlags, int enPassant) {
 		this.board = board;
 		this.castlingFlags = castlingFlags;
 		this.enPassant = enPassant;
 	}
-	
+
 	public static CorePosition loadFromResource(String resource) throws IOException {
 		byte[] bytes = new byte[33];
-		CorePosition.class.getClassLoader().getResourceAsStream(resource).read(bytes);
-		return newInstance(bytes); 
+		if (CorePosition.class.getClassLoader().getResourceAsStream(resource).read(bytes) != 33) {
+			throw new IOException("Problem reading resource");
+		}
+		return newInstance(bytes);
 	}
-	
+
 	public static CorePosition loadFromFile(String fileName) throws IOException {
 		try (FileInputStream fos = new FileInputStream(fileName)) {
 			byte[] bytes = new byte[33];
-			fos.read(bytes);
-			return newInstance(bytes); 
+			if (fos.read(bytes) != 33) {
+				throw new IOException("Problem reading file");
+			}
+			return newInstance(bytes);
 		}
 	}
-	
+
 	public static CorePosition initial() {
 		if (initialPosition == null) {
 			initialPosition = new CorePosition(
@@ -49,7 +53,7 @@ public class CorePosition implements Position {
 		}
 		return initialPosition;
 	}
-	
+
 	public static CorePosition newInstance(byte[] bytes) {
 		return new CorePosition(
 				new TiledBoard(bytes),
@@ -69,7 +73,7 @@ public class CorePosition implements Position {
 		}
 		return legalMoves;
 	}
-	
+
 	@Override
 	public CorePosition play(Move move) {
 		int newEnPassant = board.getTwoPushColumn(move);
@@ -84,7 +88,7 @@ public class CorePosition implements Position {
 				newEnPassant == EN_PASSANT_NONE ? newEnPassant : 9 - newEnPassant
 				);
 	}
-	
+
 	@Override
 	public boolean isCheck() {
 		if (!check.isPresent()) {
@@ -144,7 +148,7 @@ public class CorePosition implements Position {
 		sb.append(isMate());
 		return sb.toString();
 	}
-	
+
 	public void write(OutputStream out) throws IOException {
 		out.write(toByteArray());
 		out.flush();
@@ -153,19 +157,19 @@ public class CorePosition implements Position {
 	public char getMoveColumn1(Move move, Color colorToPlay) {
 		return board.getMoveColumn1(move, colorToPlay);
 	}
-	
+
 	public char getMoveColumn2(Move move, Color colorToPlay) {
 		return board.getMoveColumn2(move, colorToPlay);
 	}
-	
+
 	public char getMoveRow1(Move move, Color colorToPlay) {
 		return board.getMoveRow1(move, colorToPlay);
 	}
-	
+
 	public char getMoveRow2(Move move, Color colorToPlay) {
 		return board.getMoveRow2(move, colorToPlay);
 	}
-	
+
 	public boolean isCapture(Move move) {
 		return (board.isCapture(move) || isEnPassant(move));
 	}
@@ -188,5 +192,5 @@ public class CorePosition implements Position {
 	public String getPiece(Move move) {
 		return board.getPiece(move);
 	}
-	
+
 }
