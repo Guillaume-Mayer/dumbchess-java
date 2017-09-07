@@ -10,7 +10,8 @@ import chess.core.ColorPosition;
 import chess.core.Move;
 
 public class Main {
-
+	
+	/** Main method */
 	public static void main(String[] args) throws IOException {
 
 		Properties props = new Properties();
