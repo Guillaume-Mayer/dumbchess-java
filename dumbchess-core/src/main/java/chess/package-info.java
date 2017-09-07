@@ -1,4 +1,4 @@
 /**
- * Package for the main class
+ * Package for the main class.
  */
 package chess;
