@@ -33,7 +33,9 @@ public class PositionBenchmark {
 		while (randomChoices.size() < NB_MOVES) {
 	        Collection<chess.core.Move> movesI = posI.getLegalMoves();
 	        List<chess.old.Move> movesM = posM.getLegalMoves();
-	        if (movesI.size() != movesM.size() || movesI.isEmpty()) throw new RuntimeException("Different moves number or none");
+	        if (movesI.size() != movesM.size() || movesI.isEmpty()) {
+	        	throw new RuntimeException("Different moves number or none");
+	        }
 	        int rand = random.nextInt(movesI.size());
 	        chess.old.Move moveM = movesM.get(rand);
 	        String sMove = posM.moveToAlg(moveM);

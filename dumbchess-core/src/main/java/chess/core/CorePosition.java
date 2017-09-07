@@ -8,11 +8,6 @@ import java.util.Base64;
 import java.util.Collection;
 import java.util.Optional;
 
-import chess.core.Board;
-import chess.core.CastlingFlags;
-import chess.core.Move;
-import chess.core.Position;
-
 public class CorePosition implements Position {
 		
 	private Board board;

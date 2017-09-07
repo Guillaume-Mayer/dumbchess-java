@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
-import chess.core.Board;
-import chess.core.Tile;
-
 public class TiledBoard implements Board {
 	
 	private static final int SIZE = 120;
