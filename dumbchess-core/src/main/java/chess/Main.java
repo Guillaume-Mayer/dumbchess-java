@@ -14,7 +14,7 @@ public class Main {
 	/**
 	 * Main entry, no args are needed
 	 * 
-	 * @param args
+	 * @param args Not needed
 	 * @throws IOException
 	 */
 	public static void main(final String[] args) throws IOException {
@@ -27,7 +27,8 @@ public class Main {
 		ColorPosition cPos = ColorPosition.initial();
 		Random random = new Random();
 		int index = 1;
-		while(index < 20) {
+		final int LOOPS = 20;
+		while(index < LOOPS) {
 			List<Move> moves = cPos.getLegalMoves().stream().collect(Collectors.toList());
 			Move m = moves.get(random.nextInt(moves.size()));
 			System.out.println("--------------- " + cPos.moveToAlgeb(m) + " ------------------");
