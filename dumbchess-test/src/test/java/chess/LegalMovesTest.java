@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import chess.core.ColorPosition;
@@ -20,10 +21,11 @@ public class LegalMovesTest {
 	
 	private ColorPosition pos1;
 	private PositionClassic pos2;
-	private WebTarget target = ClientBuilder.newClient().target("http://localhost:8080/chess");
+	private WebTarget target = ClientBuilder.newClient().target("http://localhost:3000/chess");
 
 	private Random random = new Random();
-
+	
+	@Ignore
 	@Test
 	public void testRandomPlay() {
 		for (int i = 0; i < 200; i++) {
