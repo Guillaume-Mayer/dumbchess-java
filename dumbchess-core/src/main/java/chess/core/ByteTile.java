@@ -19,15 +19,15 @@ class ByteTile implements Tile {
 	
 	private byte tile;
 	
-	public ByteTile(byte tile) {
+	public ByteTile(final byte tile) {
 		this.tile = tile;
 	}
 
-	public ByteTile(int tile) {
+	public ByteTile(final int tile) {
 		this((byte) tile);
 	}
 	
-	public ByteTile(Piece piece, Color color) {
+	public ByteTile(final Piece piece, final Color color) {
 		switch (piece) {
 		case PAWN:
 			this.tile = (color == Color.WHITE ? WHITE_PAWN : BLACK_PAWN);
@@ -73,7 +73,7 @@ class ByteTile implements Tile {
 	}
 
 	@Override
-	public boolean hasPiece(Piece piece) {
+	public boolean hasPiece(final Piece piece) {
 		switch (piece) {
 		case PAWN:
 			return (tile == WHITE_PAWN || tile == BLACK_PAWN);
@@ -93,7 +93,7 @@ class ByteTile implements Tile {
 	}
 
 	@Override
-	public boolean isColor(Color color) {
+	public boolean isColor(final Color color) {
 		switch (color) {
 		case WHITE:
 			return isWhite();
@@ -151,7 +151,7 @@ class ByteTile implements Tile {
 	}
 	
 	@Override
-	public boolean is(byte b) {
+	public boolean is(final byte b) {
 		return (tile == b);
 	}
 }

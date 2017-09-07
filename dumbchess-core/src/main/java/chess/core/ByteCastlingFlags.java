@@ -10,11 +10,11 @@ public class ByteCastlingFlags implements CastlingFlags {
 
 	private byte flags;
 	
-	public ByteCastlingFlags(byte flags) {
+	public ByteCastlingFlags(final byte flags) {
 		this.flags = flags;
 	}
 	
-	public ByteCastlingFlags(boolean whiteKingSide, boolean whiteQueenSide, boolean blackKingSide, boolean blackQueenSide) {
+	public ByteCastlingFlags(final boolean whiteKingSide, final boolean whiteQueenSide, final boolean blackKingSide, final boolean blackQueenSide) {
 		if (whiteKingSide) flags |= WHITE_KING_SIDE;
 		if (whiteQueenSide) flags |= WHITE_QUEEN_SIDE;
 		if (blackKingSide) flags |= BLACK_KING_SIDE;
@@ -31,7 +31,7 @@ public class ByteCastlingFlags implements CastlingFlags {
 	}
 
 	@Override
-	public boolean kingSide(Color color) {
+	public boolean kingSide(final Color color) {
 		switch (color) {
 		case WHITE:
 			return ((flags & WHITE_KING_SIDE) == WHITE_KING_SIDE);
@@ -43,7 +43,7 @@ public class ByteCastlingFlags implements CastlingFlags {
 	}
 
 	@Override
-	public boolean queenSide(Color color) {
+	public boolean queenSide(final Color color) {
 		switch (color) {
 		case WHITE:
 			return ((flags & WHITE_QUEEN_SIDE) == WHITE_QUEEN_SIDE);

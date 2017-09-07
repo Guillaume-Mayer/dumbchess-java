@@ -8,7 +8,7 @@ public class ColorPosition implements Position {
 	private CorePosition corePosition;
 	private Color colorToPlay;
 	
-	public ColorPosition(CorePosition corePosition, Color colorToPlay) {
+	public ColorPosition(final CorePosition corePosition, final Color colorToPlay) {
 		this.corePosition = corePosition;
 		this.colorToPlay = colorToPlay;
 	}
@@ -23,7 +23,7 @@ public class ColorPosition implements Position {
 	}
 	
 	@Override
-	public ColorPosition play(Move move) {
+	public ColorPosition play(final Move move) {
 		return new ColorPosition(corePosition.play(move), colorToPlay == Color.WHITE ? Color.BLACK : Color.WHITE);
 	}
 	
@@ -52,7 +52,7 @@ public class ColorPosition implements Position {
 		return corePosition.toBase64();
 	}
 	
-	public String moveToAlgeb(Move move) {
+	public String moveToAlgeb(final Move move) {
 		StringBuilder sb;
 		if (corePosition.isCastleKing(move)) {
 			sb = new StringBuilder("O-O");
@@ -101,7 +101,7 @@ public class ColorPosition implements Position {
 		return sb.toString();
 	}
 
-	public ColorPosition play(String sMove) {
+	public ColorPosition play(final String sMove) {
 		Optional<Move> oMove = getLegalMoves().stream().filter(m -> moveToAlgeb(m).equals(sMove)).findAny();
 		if (oMove.isPresent()) return play(oMove.get());
 		throw new IllegalMoveException("Move \"" + sMove + "\" is not legal");
