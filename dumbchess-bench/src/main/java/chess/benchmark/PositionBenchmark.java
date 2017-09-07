@@ -17,18 +17,18 @@ import chess.old.PositionClassic;
 
 @State(Scope.Benchmark)
 public class PositionBenchmark {
-	
+
 	private ColorPosition posI;
 	private PositionClassic posM;
-	private List<Integer> randomChoices;	
+	private List<Integer> randomChoices;
 	private static final int NB_MOVES = 7;
-			
+
 	@Setup(Level.Trial)
 	public void prepareRandomChoices() {
 		posI = ColorPosition.initial();
 		posM = new PositionClassic();
 		randomChoices = new ArrayList<>(NB_MOVES);
-		List<String> randomMoves = new ArrayList<>(NB_MOVES);
+		//List<String> randomMoves = new ArrayList<>(NB_MOVES);
 		Random random = new Random(1);
 		while (randomChoices.size() < NB_MOVES) {
 	        Collection<chess.core.Move> movesI = posI.getLegalMoves();
@@ -39,25 +39,25 @@ public class PositionBenchmark {
 	        int rand = random.nextInt(movesI.size());
 	        chess.old.Move moveM = movesM.get(rand);
 	        String sMove = posM.moveToAlg(moveM);
-	        randomMoves.add(sMove);
+	        //randomMoves.add(sMove);
 	        chess.core.Move moveI = movesI.stream().filter(m -> posI.moveToAlgeb(m).equals(sMove)).findAny().get();
 	        posM.play(moveM);
 	        posI = posI.play(moveI);
 	        randomChoices.add(rand);
 		}
 	}
-	
+
     @Benchmark
     public void playImmutable() {
     	posI = ColorPosition.initial();
-        List<chess.core.Move> moves = 
+        List<chess.core.Move> moves =
         	posI.getLegalMoves().stream()
         		.sorted((a,b) -> posI.moveToAlgeb(a).compareTo(posI.moveToAlgeb(b)))
         		.collect(Collectors.toList());
         int count = 0;
         while (!moves.isEmpty() && count < NB_MOVES) {
         	posI.play(moves.get(randomChoices.get(count)));
-        	moves = 
+        	moves =
         			posI.getLegalMoves().stream()
                 		.sorted((a,b) -> posI.moveToAlgeb(a).compareTo(posI.moveToAlgeb(b)))
                 		.collect(Collectors.toList());
@@ -82,5 +82,5 @@ public class PositionBenchmark {
         	count++;
         }
    }
-    
+
 }
