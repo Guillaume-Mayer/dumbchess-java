@@ -25,7 +25,7 @@ public class LegalMovesTest {
 
 	private Random random = new Random();
 	
-	//@Ignore
+	@Ignore
 	@Test
 	public void testRandomPlay() {
 		for (int i = 0; i < 200; i++) {
